@@ -12,11 +12,74 @@
 using namespace std;
 
 char character(char start, int offset);
+void validate(char start, int offset);
 
 
 int main()
 {
+	validate('a', 1);
+	validate('a', -1);
+	validate('Z', -1);
+	validate('?', 5);
+
+
+	cout << endl << endl;
+	system("pause");
+	return 0;
+}
+
+char character(char start, int offset)
+{
+	int startValue = int(start);
+	int target = startValue + offset;
+
+	if (start < 'A' || (start > 'Z' && start < 'a') || start > 'z')
+	{
+		string invalidCharacterException = "Error: Invalid Character Exception";
+		throw invalidCharacterException;
+	}
+	if (target < 'A' || (target > 'Z' && target < 'a') || target > 'z')
+	{
+		char invalidRangeException[] = { "Error: Invalid Range Exception" };
+		throw invalidRangeException;
+	}
+	return start + offset;
+}
+
+void validate(char start, int offset)
+{
 	try
+	{
+		cout << character(start, offset) << endl;
+	}
+		catch (string invalidRangeException)
+		{
+			cout << invalidRangeException << endl;
+		}
+
+		catch (char invalidCharacterException[])
+		{
+			cout << invalidCharacterException << endl;
+		}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Put this in main and delete validate function if there is only supposed to be one function prototype.
+/*
+* 	try
 	{
 		char ch = character('a', 1);
 		cout << ch << endl;
@@ -32,31 +95,9 @@ int main()
 	{
 		cout << invalidRangeException;
 	}
+
 	catch (char invalidCharacterException[])
 	{
 		cout << invalidCharacterException;
 	}
-
-
-	cout << endl << endl;
-	system("pause");
-	return 0;
-}
-
-char character(char start, int offset)
-{
-	int startValue = int(start);
-	int target = startValue + offset;
-
-	if (start < 'A' || (start > 'Z' && start < 'a') || start > 'z')
-	{
-		string invalidCharacterException = "Error: Invalid Character";
-		throw invalidCharacterException;
-	}
-	if (target < 'A' || (target > 'Z' && target < 'a') || target > 'z')
-	{
-		char invalidRangeException[] = { "Error: Invalid Range" };
-		throw invalidRangeException;
-	}
-	return start + offset;
-}
+*/
