@@ -20,12 +20,23 @@ int main()
 	{
 		char ch = character('a', 1);
 		cout << ch << endl;
+		ch = character('a', -1);
+		cout << ch << endl;
+		ch = character('Z', -1);
+		cout << ch << endl;
+		ch = character('?', 5);
+		cout << ch << endl;
 
 	}
-	catch (string Exceptions)
+	catch (string invalidRangeException)
 	{
-		cout << Exceptions;
+		cout << invalidRangeException;
 	}
+	catch (char invalidCharacterException[])
+	{
+		cout << invalidCharacterException;
+	}
+
 
 	cout << endl << endl;
 	system("pause");
@@ -39,8 +50,13 @@ char character(char start, int offset)
 
 	if (start < 'A' || (start > 'Z' && start < 'a') || start > 'z')
 	{
-		string invalidCharacterException = "\nError: Invalid Character";
+		string invalidCharacterException = "Error: Invalid Character";
 		throw invalidCharacterException;
+	}
+	if (target < 'A' || (target > 'Z' && target < 'a') || target > 'z')
+	{
+		char invalidRangeException[] = { "Error: Invalid Range" };
+		throw invalidRangeException;
 	}
 	return start + offset;
 }
